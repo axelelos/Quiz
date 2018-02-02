@@ -1,0 +1,23 @@
+
+    <section>
+        <h1>Välj quiz</h1>
+        <table><tr><td><h4>Quiznamn</h4></td><td>Quizinfo</td><td></td></tr>
+            <?php
+            include ('dbconnection.php');
+
+            $sql = "SELECT * FROM quiz";
+            $stmt = $dbconn->prepare($sql);
+            $data = array();
+            $stmt->execute($data);
+
+            while ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $quizname = $res["name"];
+                $quizid = $res["id"];
+                ?><form method="post" action="quiz.php"> 
+                <input type="hidden"  name="quiz" value="<?php echo $quizid ?>">
+                <tr><td><?php echo $quizname ?></td><td></td><td><button type="submit">Spela</button></td></tr></form>
+                <?php
+            }
+            ?>
+        </table>    
+    </section>
